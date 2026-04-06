@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Las Calles de AMA Contigo — Star Office Bootcamp</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --orange: #E8A020;
+  --dark-orange: #C47B10;
+  --navy: #0D2340;
+  --navy2: #1a3a5c;
+  --teal: #00897B;
+  --green: #2E7D32;
+  --blue: #1565C0;
+  --purple: #6A1B9A;
+  --red: #C62828;
+  --cream: #FFF8EE;
+  --white: #FFFFFF;
+  --dark: #1A1A1A;
+  --gray: #F4F4F0;
+  --mid-gray: #888;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--gray);color:var(--dark);overflow-x:hidden;}
+
+/* HERO */
+.hero{background:linear-gradient(145deg,var(--navy) 0%,#162d4a 60%,#0a1e35 100%);padding:44px 20px 52px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-100px;right:-100px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(232,160,32,.14) 0%,transparent 70%);}
+.hero::after{content:'';position:absolute;bottom:-80px;left:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(0,137,123,.1) 0%,transparent 70%);}
+.hero-eyebrow{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:18px;}
+.hero-dot{width:7px;height:7px;border-radius:50%;background:var(--orange);}
+.hero-label{font-size:11px;font-weight:700;color:var(--orange);letter-spacing:3px;text-transform:uppercase;}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(34px,8vw,54px);font-weight:900;color:#fff;line-height:1.05;margin-bottom:6px;}
+.hero h1 span{color:var(--orange);display:block;}
+.hero-sub{font-size:14px;color:rgba(255,255,255,.6);margin-bottom:24px;font-weight:300;}
+.hero-badges{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;}
+.badge{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.82);font-size:11px;font-weight:500;padding:5px 12px;border-radius:100px;}
+
+/* STARS BANNER */
+.stars-banner{background:linear-gradient(135deg,var(--dark-orange),var(--orange));padding:14px 20px;text-align:center;}
+.stars-banner p{color:#fff;font-size:13px;font-weight:600;letter-spacing:.3px;}
+.stars-banner .stars{font-size:20px;margin-bottom:4px;}
+
+/* NAV */
+.nav-tabs{background:#fff;display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;border-bottom:2px solid #E8E8E0;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.08);}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.nav-tab{flex-shrink:0;padding:15px 18px;font-size:12px;font-weight:600;color:#999;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;font-family:'DM Sans',sans-serif;}
+.nav-tab.active{color:var(--dark-orange);border-bottom-color:var(--orange);}
+
+/* SECTIONS */
+.section{display:none;padding:20px 18px;max-width:680px;margin:0 auto;animation:fadeUp .3s ease;}
+.section.active{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+/* SECTION HEADER */
+.sec-header{padding:26px 22px;border-radius:16px;margin-bottom:18px;position:relative;overflow:hidden;}
+.sec-header::after{content:attr(data-emoji);position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:60px;opacity:.1;}
+.sec-header h2{font-family:'Fraunces',serif;font-size:21px;font-weight:900;color:#fff;margin-bottom:5px;position:relative;}
+.sec-header p{font-size:12px;color:rgba(255,255,255,.78);position:relative;line-height:1.5;}
+
+/* CARDS */
+.card{background:#fff;border-radius:14px;padding:18px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.06);border-left:4px solid transparent;}
+.card-title{font-family:'Fraunces',serif;font-size:15px;font-weight:700;color:var(--dark);margin-bottom:8px;display:flex;align-items:center;gap:7px;}
+.card-body{font-size:13px;color:#444;line-height:1.65;}
+.card-body ul{padding-left:16px;margin-top:5px;}
+.card-body li{margin-bottom:4px;}
+
+/* HIGHLIGHT */
+.hl{border-radius:10px;padding:13px 15px;margin:10px 0;font-size:13px;line-height:1.6;}
+
+/* ROLE TABLE */
+.role-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:8px;}
+.role-card{border-radius:12px;overflow:hidden;}
+.role-header{padding:10px 14px;font-size:12px;font-weight:700;color:#fff;letter-spacing:.5px;text-transform:uppercase;}
+.role-body{padding:12px 14px;font-size:13px;color:#333;line-height:1.6;background:#fff;border:1px solid #eee;border-top:none;border-radius:0 0 12px 12px;}
+.role-body ul{padding-left:14px;}
+.role-body li{margin-bottom:3px;}
+
+/* STAR DIMENSION */
+.star-dim{background:#fff;border-radius:14px;overflow:hidden;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
+.star-dim-header{padding:14px 18px;display:flex;align-items:center;gap:12px;}
+.star-dim-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.star-dim-title{font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:#fff;}
+.star-dim-sub{font-size:11px;color:rgba(255,255,255,.8);margin-top:2px;}
+.star-dim-body{padding:14px 18px;font-size:13px;color:#444;line-height:1.65;border-top:1px solid #F0F0E8;}
+.star-dim-body ul{padding-left:14px;}
+.star-dim-body li{margin-bottom:4px;}
+
+/* CHECKLIST */
+.checklist-item{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #F0F0E8;font-size:13px;color:#333;line-height:1.5;}
+.checklist-item:last-child{border-bottom:none;}
+.check-box{width:22px;height:22px;border-radius:6px;border:2px solid #ddd;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;margin-top:1px;}
+.check-box.checked{background:var(--green);border-color:var(--green);color:#fff;}
+
+/* MITO CARD */
+.mito-card{background:#fff;border-radius:14px;overflow:hidden;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.06);cursor:pointer;}
+.mito-hdr{padding:10px 16px;font-size:11px;font-weight:700;color:#fff;letter-spacing:1px;text-transform:uppercase;}
+.mito-q{padding:16px 16px 12px;font-family:'Fraunces',serif;font-size:15px;font-weight:700;color:var(--dark);line-height:1.4;}
+.mito-ans{padding:12px 16px;font-size:13px;line-height:1.6;border-top:1px solid #F0F0E8;display:none;}
+.mito-label{font-size:17px;font-weight:700;font-family:'Fraunces',serif;margin-bottom:5px;}
+
+/* STEPS */
+.step-list{list-style:none;}
+.step-list li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid #F0F0E8;font-size:13px;line-height:1.55;color:#333;}
+.step-list li:last-child{border-bottom:none;}
+.step-num{width:24px;height:24px;border-radius:50%;background:var(--orange);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+
+/* INFO TABLE */
+.info-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:6px;}
+.info-table th{background:var(--navy);color:#fff;padding:9px 11px;text-align:left;font-weight:600;font-size:11px;letter-spacing:.5px;}
+.info-table td{padding:9px 11px;border-bottom:1px solid #F0F0E8;vertical-align:top;color:#333;line-height:1.5;}
+.info-table tr:last-child td{border-bottom:none;}
+.info-table tr:nth-child(even) td{background:#FAFAF5;}
+
+/* ACCORDION */
+.accordion{background:#fff;border-radius:12px;overflow:hidden;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,.05);}
+.acc-btn{width:100%;padding:15px 18px;text-align:left;background:none;border:none;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:var(--dark);cursor:pointer;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid transparent;transition:all .2s;}
+.acc-btn.open{border-bottom-color:#F0F0E8;color:var(--dark-orange);}
+.acc-icon{font-size:17px;transition:transform .2s;flex-shrink:0;}
+.acc-btn.open .acc-icon{transform:rotate(45deg);}
+.acc-body{display:none;padding:14px 18px;font-size:13px;color:#444;line-height:1.65;}
+.acc-body.open{display:block;}
+
+/* CERT SECTION */
+.cert-container{background:#fff;border-radius:16px;padding:22px 18px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);}
+.cert-title{font-family:'Fraunces',serif;font-size:18px;font-weight:900;color:var(--navy);text-align:center;margin-bottom:6px;}
+.cert-sub{font-size:13px;color:#666;text-align:center;margin-bottom:20px;line-height:1.5;}
+.field-group{margin-bottom:14px;}
+.field-label{font-size:12px;font-weight:700;color:var(--dark-orange);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;display:block;}
+.field-input{width:100%;padding:12px 14px;border:2px solid #E8E8E0;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--dark);transition:border-color .2s;outline:none;}
+.field-input:focus{border-color:var(--orange);}
+.cert-preview{border:2px dashed #ddd;border-radius:12px;padding:24px 18px;text-align:center;margin:18px 0;background:#FAFAF5;min-height:160px;display:flex;align-items:center;justify-content:center;}
+.cert-preview-inner{width:100%;}
+.cert-preview .cert-stars{font-size:22px;margin-bottom:8px;letter-spacing:3px;}
+.cert-preview .cert-name{font-family:'Fraunces',serif;font-size:20px;font-weight:900;color:var(--navy);margin-bottom:4px;}
+.cert-preview .cert-office{font-size:13px;color:var(--dark-orange);font-weight:600;margin-bottom:10px;}
+.cert-preview .cert-text{font-size:11px;color:#666;line-height:1.6;}
+.btn-download{width:100%;padding:15px;background:linear-gradient(135deg,var(--dark-orange),var(--orange));color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .2s;}
+.btn-download:hover{opacity:.9;}
+.btn-download:disabled{opacity:.5;cursor:not-allowed;}
+
+/* WEEK BANNER */
+.week-banner{background:linear-gradient(135deg,var(--teal),#00695C);border-radius:16px;padding:28px 20px;text-align:center;margin-bottom:16px;position:relative;overflow:hidden;}
+.week-banner::before{content:'🏥';position:absolute;right:-10px;top:-10px;font-size:80px;opacity:.1;}
+.week-banner h3{font-family:'Fraunces',serif;font-size:22px;font-weight:900;color:#fff;margin-bottom:8px;}
+.week-banner p{font-size:13px;color:rgba(255,255,255,.85);line-height:1.6;}
+.week-dates{background:rgba(255,255,255,.15);border-radius:10px;padding:10px 16px;display:inline-block;margin-top:12px;font-size:13px;font-weight:700;color:#fff;}
+
+/* COLORS */
+.bg-quality{background:linear-gradient(135deg,#1565C0,#0D47A1);}
+.bg-human{background:linear-gradient(135deg,#00695C,#004D40);}
+.bg-money{background:linear-gradient(135deg,#E65100,#BF360C);}
+.bg-cred{background:linear-gradient(135deg,#6A1B9A,#4A148C);}
+.bg-mitos{background:linear-gradient(135deg,#C62828,#B71C1C);}
+.bg-star{background:linear-gradient(135deg,#C47B10,#E8A020);}
+.bg-cert{background:linear-gradient(135deg,#0D2340,#1a3a5c);}
+
+.bl-quality{border-left-color:#1565C0;}
+.bl-human{border-left-color:#00695C;}
+.bl-money{border-left-color:#E65100;}
+.bl-purple{border-left-color:#6A1B9A;}
+.bl-red{border-left-color:#C62828;}
+.bl-orange{border-left-color:var(--orange);}
+.bl-star{border-left-color:var(--dark-orange);}
+
+.tag{display:inline-block;padding:3px 9px;border-radius:100px;font-size:11px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;margin:2px;}
+.tag-green{background:#E8F5E9;color:#2E7D32;}
+.tag-red{background:#FFEBEE;color:#C62828;}
+.tag-blue{background:#E3F2FD;color:#1565C0;}
+.tag-orange{background:#FFF3E0;color:#E65100;}
+
+.text-green{color:#2E7D32;}
+.text-red{color:#C62828;}
+
+/* FOOTER */
+.footer{background:var(--navy);text-align:center;padding:28px 20px;color:rgba(255,255,255,.45);font-size:12px;line-height:1.7;}
+.footer strong{color:var(--orange);display:block;font-family:'Fraunces',serif;font-size:17px;margin-bottom:7px;}
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow"><div class="hero-dot"></div><div class="hero-label">AMA Contigo</div><div class="hero-dot"></div></div>
+  <h1>Las Calles de<span>AMA Contigo</span></h1>
+  <p class="hero-sub">Star Office Bootcamp Edition · 10 de abril de 2026 · Hyatt Centric, San Juan</p>
+  <div class="hero-badges">
+    <span class="badge">⭐ Star Office Bootcamp</span>
+    <span class="badge">🏥 Oficinas Médicas PR</span>
+  </div>
+</div>
+
+<div class="stars-banner">
+  <div class="stars">⭐⭐⭐⭐⭐</div>
+  <p>Una Oficina 5 Estrellas va más allá de las métricas — es calidad, corazón, procesos y equipo trabajando juntos.</p>
+</div>
+
+<!-- NAV -->
+<div class="nav-tabs" id="navTabs">
+  <button class="nav-tab active" onclick="showTab('star')">⭐ 5 Estrellas</button>
+  <button class="nav-tab" onclick="showTab('quality')">📊 Quality</button>
+  <button class="nav-tab" onclick="showTab('human')">💙 Human First</button>
+  <button class="nav-tab" onclick="showTab('money')">💰 Money Flow</button>
+  <button class="nav-tab" onclick="showTab('claim')">📋 Claim Rescue</button>
+  <button class="nav-tab" onclick="showTab('mitos')">🎯 Mitos</button>
+  <button class="nav-tab" onclick="showTab('semana')">🏆 Reconocimiento</button>
+  
+</div>
+
+<div style="background:var(--gray);padding-bottom:40px;">
+
+<!-- ===== STAR OFFICE BOOTCAMP ===== -->
+<div class="section active" id="tab-star">
+  <div class="sec-header bg-star" data-emoji="⭐">
+    <h2>Star Office Bootcamp</h2>
+    <p>¿Qué hace a una Oficina 5 Estrellas? Las 5 dimensiones del éxito.</p>
+  </div>
+
+  <div class="card bl-star">
+    <div class="card-title">🌟 El concepto</div>
+    <div class="card-body">
+      Una Oficina 5 Estrellas no es solo la que saca 5 estrellas en Medicare Advantage y Medicaid. Es la que combina calidad clínica, corazón humano, procesos sólidos, finanzas inteligentes y un equipo que trabaja unido. <strong>Hoy este bootcamp fue tu entrenamiento para llegar ahí.</strong>
+    </div>
+  </div>
+
+  <div class="star-dim">
+    <div class="star-dim-header" style="background:linear-gradient(135deg,#1565C0,#0D47A1);">
+      <div class="star-dim-icon" style="background:rgba(255,255,255,.15);">⭐</div>
+      <div><div class="star-dim-title">Estrella 1 — Calidad & Métricas</div><div class="star-dim-sub">Quality Starts at the Front Desk</div></div>
+    </div>
+    <div class="star-dim-body">
+      <ul>
+        <li>Revisar InnovaMD diariamente para seguimiento post-ER y post-alta</li>
+        <li>Coordinar citas preventivas y cerrar medidas HEDIS activamente</li>
+        <li>Documentar cada gestión de seguimiento hospitalario</li>
+        <li>Conocer FMC (7 días o menos, puede ser encuentro telefónico), MRP (en o antes de 30 días — aplica a Medicaid/Vital, facturar 1111F) y readmisiones — y actuar sobre ellas</li>
+        <li>Educar al paciente sobre la Línea Haciendo Contacto para evitar ER innecesarios cuando el médico esté fuera de oficina</li>
+        <li>Monitorear el % de encuentro para sobrepasar la meta (≥75%) — cada visita cuenta</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="star-dim">
+    <div class="star-dim-header" style="background:linear-gradient(135deg,#00695C,#004D40);">
+      <div class="star-dim-icon" style="background:rgba(255,255,255,.15);">💙</div>
+      <div><div class="star-dim-title">Estrella 2 — Corazón & Empatía</div><div class="star-dim-sub">Human First</div></div>
+    </div>
+    <div class="star-dim-body">
+      <ul>
+        <li>Responder con calma aunque el paciente llegue frustrado</li>
+        <li>Validar antes de resolver — "Entiendo que esto le preocupa..."</li>
+        <li>Practicar autocuidado para dar lo mejor en el trabajo</li>
+        <li>Reconocer señales de alerta en el equipo y apoyarse mutuamente</li>
+        <li>Tu tono define la interacción — siempre</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="star-dim">
+    <div class="star-dim-header" style="background:linear-gradient(135deg,#E65100,#BF360C);">
+      <div class="star-dim-icon" style="background:rgba(255,255,255,.15);">💰</div>
+      <div><div class="star-dim-title">Estrella 3 — Finanzas Inteligentes</div><div class="star-dim-sub">Money Flow</div></div>
+    </div>
+    <div class="star-dim-body">
+      <ul>
+        <li>Conocer los indicadores que afectan la capitación del médico</li>
+        <li>Monitorear el % de encuentro — cada visita cuenta</li>
+        <li>Mantener Patient Experience alta con trato cálido y eficiente</li>
+        <li>Usar InnovaMD al nivel que genera ajuste positivo (≥75%)</li>
+        <li>Apoyar al médico en documentación y KPIs activamente</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="star-dim">
+    <div class="star-dim-header" style="background:linear-gradient(135deg,#6A1B9A,#4A148C);">
+      <div class="star-dim-icon" style="background:rgba(255,255,255,.15);">📋</div>
+      <div><div class="star-dim-title">Estrella 4 — Procesos Sólidos</div><div class="star-dim-sub">Claim Rescue & Credenciales</div></div>
+    </div>
+    <div class="star-dim-body">
+      <ul>
+        <li>Distinguir entre rechazo y denegación — y actuar diferente en cada caso</li>
+        <li>Verificar elegibilidad en cada visita, no solo una vez al año</li>
+        <li>Mantener el calendario de apelaciones actualizado</li>
+        <li>Tener la configuración de clearinghouse correcta siempre — <strong>recuerda: en Medicaid/Vital el billing es el del grupo médico</strong></li>
+        <li>Documentar ICD-10 específico desde la primera reclamación</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="star-dim">
+    <div class="star-dim-header" style="background:linear-gradient(135deg,#C47B10,#E8A020);">
+      <div class="star-dim-icon" style="background:rgba(255,255,255,.15);">🤝</div>
+      <div><div class="star-dim-title">Estrella 5 — Equipo Unido</div><div class="star-dim-sub">Cada rol, cumpliendo su parte</div></div>
+    </div>
+    <div class="star-dim-body">
+      <ul>
+        <li>Cada miembro conoce su rol y cómo impacta las métricas</li>
+        <li>Comunicación clara entre secretaria, biller, enfermera y médico</li>
+        <li>El equipo se apoya — nadie trabaja solo en una oficina 5 estrellas</li>
+        <li>Reconocer el trabajo de cada uno — empezando hoy</li>
+        <li>Comprometerse con mejora continua, no con perfección inmediata</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card bl-star" style="background:linear-gradient(135deg,#FFF8EE,#fff);">
+    <div class="card-title">🎯 ¿Qué te falta para llegar?</div>
+    <div class="card-body">
+      Marca lo que ya haces en tu oficina y descubre qué estrella necesitas trabajar más.
+      <div style="margin-top:12px;" id="checklistContainer">
+        <div class="checklist-item"><div class="check-box" onclick="toggleCheck(this)"></div><div>Revisamos InnovaMD todos los días y asignamos quién lo hace</div></div>
+        <div class="checklist-item"><div class="check-box" onclick="toggleCheck(this)"></div><div>Verificamos elegibilidad antes de cada visita del paciente</div></div>
+        <div class="checklist-item"><div class="check-box" onclick="toggleCheck(this)"></div><div>Tenemos un proceso claro para rechazos vs denegaciones</div></div>
+        <div class="checklist-item"><div class="check-box" onclick="toggleCheck(this)"></div><div>Coordinamos activamente citas preventivas sin que el médico lo pida</div></div>
+        <div class="checklist-item"><div class="check-box" onclick="toggleCheck(this)"></div><div>Practicamos comunicación empática con pacientes difíciles</div></div>
+        <div class="checklist-item"><div class="check-box" onclick="toggleCheck(this)"></div><div>Conocemos los indicadores que afectan el ingreso del médico</div></div>
+        <div class="checklist-item"><div class="check-box" onclick="toggleCheck(this)"></div><div>Cada miembro del equipo sabe exactamente cuál es su rol en las métricas</div></div>
+        <div class="checklist-item"><div class="check-box" onclick="toggleCheck(this)"></div><div>Practicamos autocuidado individual y apoyamos al equipo</div></div>
+        <div class="checklist-item"><div class="check-box" onclick="toggleCheck(this)"></div><div>Tenemos la configuración correcta en el clearinghouse</div></div>
+        <div class="checklist-item"><div class="check-box" onclick="toggleCheck(this)"></div><div>Documentamos ICD-10 específico en cada visita</div></div>
+      </div>
+      <div id="starScore" style="margin-top:14px;padding:12px;background:#FFF8EE;border-radius:10px;text-align:center;font-weight:700;color:var(--dark-orange);font-size:14px;">Marca las que ya haces y ve tu puntaje ⭐</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== QUALITY ===== -->
+<div class="section" id="tab-quality">
+  <div class="sec-header bg-quality" data-emoji="⭐">
+    <h2>Quality Front Desk & ER Strategy</h2>
+    <p>Métricas Star · InnovaMD · Haciendo Contacto · IPA Holdings</p>
+  </div>
+
+  <div class="card bl-quality">
+    <div class="card-title">📊 Las 3 métricas del escenario hospitalario</div>
+    <div class="card-body">
+      <table class="info-table">
+        <tr><th>Métrica</th><th>¿Qué mide?</th><th>¿Qué hace la oficina?</th></tr>
+        <tr><td><strong style="color:#1565C0;">FMC</strong> Seguimiento post-ER</td><td>Si el paciente recibió seguimiento luego del ER (7 días o menos — puede ser encuentro telefónico)</td><td>Llamar, coordinar cita con PCP, documentar</td></tr>
+        <tr><td><strong style="color:#2E7D32;">MRP</strong> Reconciliación</td><td>Si el PCP revisó medicamentos post-alta en 30 días o antes (aplica a Medicaid/Vital — facturar 1111F)</td><td>Revisar lista, confirmar cambios, educar</td></tr>
+        <tr><td><strong style="color:#E65100;">Readmisiones</strong></td><td>Si el paciente regresa al hospital en 30 días</td><td>Seguimiento oportuno, coordinación, educación</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card bl-quality">
+    <div class="card-title">💻 InnovaMD — Acción clave de la oficina</div>
+    <div class="card-body">
+      En InnovaMD puedes verificar: visitas al ER, altas hospitalarias, fecha del evento e información del paciente.
+      <div class="hl" style="background:#E3F2FD;margin-top:10px;">
+        <strong style="color:#1565C0;">🔑 Regla de oro:</strong> Alguien en la oficina debe revisar InnovaMD <strong>mínimo una vez al día</strong> y tener ese rol asignado formalmente.
+      </div>
+    </div>
+  </div>
+
+  <div class="card bl-quality">
+    <div class="card-title">📞 Línea Haciendo Contacto — MMM</div>
+    <div class="card-body">
+      <div style="background:var(--navy);color:white;border-radius:10px;padding:14px;text-align:center;margin-bottom:10px;">
+        <div style="font-size:22px;font-weight:700;color:var(--orange);font-family:'Fraunces',serif;">1-866-677-7779</div>
+        <div style="font-size:11px;opacity:.8;margin-top:3px;">787-622-3482</div>
+      </div>
+      Coordinación de cuidado para pacientes de alto riesgo, frecuentes usuarios de ER y post-alta hospitalaria.
+      <div class="hl" style="background:#E8F5E9;margin-top:10px;">
+        <strong style="color:#2E7D32;">💡 Educa a tus pacientes:</strong> Recuérdales que pueden llamar a esta línea cuando el médico esté fuera de oficina — así evitan ir al ER innecesariamente.
+      </div>
+    </div>
+  </div>
+
+  <div class="card bl-quality">
+    <div class="card-title">🚦 Semáforo de Prioridades — ¿A quién atender primero?</div>
+    <div class="card-body">
+      <p style="font-size:12px;color:#555;margin-bottom:10px;">Para el personal de <strong>front desk</strong>. Ante cualquier duda clínica, consúltalo con el médico.</p>
+      <table class="info-table">
+        <tr>
+          <th style="background:#C62828;color:#fff;">🔴 ROJO — HOY<br><span style="font-weight:400;font-size:11px;">Alto riesgo · Acción inmediata</span></th>
+          <th style="background:#F9A825;color:#fff;">🟡 AMARILLO — ≤7 días<br><span style="font-weight:400;font-size:11px;">Crítico · Coordinar esta semana</span></th>
+          <th style="background:#2E7D32;color:#fff;">🟢 VERDE — Programado<br><span style="font-weight:400;font-size:11px;">Seguimiento rutinario</span></th>
+        </tr>
+        <tr>
+          <td>Alta hospitalaria &lt;48 horas</td>
+          <td>🔥 FMC pendiente (DEBE ser ≤7 días)</td>
+          <td>Pacientes para visita anual</td>
+        </tr>
+        <tr>
+          <td>Visita a ER en últimas 24–48h</td>
+          <td>Alta hospitalaria 3–7 días</td>
+          <td>Seguimiento de condiciones estables</td>
+        </tr>
+        <tr>
+          <td>Paciente frecuente de ER (≥3 visitas)</td>
+          <td>Reconciliación de medicamentos pendiente (MRP ≤30 días)</td>
+          <td>Resultados normales para revisión</td>
+        </tr>
+        <tr>
+          <td>Síntomas activos o empeorando*</td>
+          <td>Paciente crónico sin seguimiento reciente</td>
+          <td>Citas ya programadas sin urgencia</td>
+        </tr>
+        <tr>
+          <td>Cambios recientes de medicamentos con riesgo*</td>
+          <td>Resultados importantes pendientes (ej. labs anormales)*</td>
+          <td>Solicitudes administrativas</td>
+        </tr>
+        <tr>
+          <td>Paciente inestable / múltiples llamadas mismo día*</td>
+          <td>No adherente a tratamiento con riesgo clínico*</td>
+          <td>Renovaciones de rutina</td>
+        </tr>
+      </table>
+      <div class="hl" style="background:#FFF3E0;margin-top:10px;">
+        <strong style="color:#E65100;">⚡ Regla de oro:</strong> Cuando el paciente llega o llama — <strong>haz las preguntas clave:</strong> ¿Estuvo en el ER recientemente? ¿Le dieron de alta del hospital? ¿Tiene síntomas nuevos? Esas respuestas te dicen en qué color está. Si tienes duda — consulta con el médico.
+      </div>
+      <p style="font-size:11px;color:#888;margin-top:8px;">* Ante estos casos, siempre consulta con el médico antes de actuar.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HUMAN FIRST ===== -->
+<div class="section" id="tab-human">
+  <div class="sec-header bg-human" data-emoji="💙">
+    <h2>Human First</h2>
+    <p>Empatía y Salud Emocional en la Oficina Médica</p>
+  </div>
+
+  <div class="card bl-human">
+    <div class="card-title">🧠 ¿Qué es la Salud Emocional?</div>
+    <div class="card-body">
+      La capacidad de manejar emociones, afrontar el estrés, tomar buenas decisiones y mantener buenas relaciones en entornos de alta presión.
+      <div class="hl" style="background:#E0F2F1;margin-top:10px;font-style:italic;">"La salud emocional influye no solo en cada persona, sino también en el equipo de trabajo y en la experiencia de nuestros pacientes."</div>
+    </div>
+  </div>
+
+  <div class="card bl-human">
+    <div class="card-title">⚠️ Señales de Alerta</div>
+    <div class="card-body">
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;">
+        <span class="tag tag-red">Irritabilidad</span><span class="tag tag-red">Cansancio extremo</span><span class="tag tag-red">Desmotivación</span><span class="tag tag-red">Ansiedad</span><span class="tag tag-red">Estrés constante</span><span class="tag tag-red">Pacientes difíciles</span><span class="tag tag-red">Falta de reconocimiento</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card bl-human">
+    <div class="card-title">🗣️ Comunicación en Tiempo Real</div>
+    <div class="card-body">
+      <table class="info-table">
+        <tr><th>Principio</th><th>Ejemplo</th></tr>
+        <tr><td>No necesitas la respuesta perfecta</td><td>"En este momento, déjeme verificar..."</td></tr>
+        <tr><td>Valida antes de resolver</td><td>"Entiendo que esto le preocupa..."</td></tr>
+        <tr><td>Tu tono define la interacción</td><td>Calma genera calma siempre</td></tr>
+        <tr><td>Redirige a solución</td><td>"Vamos a ver cómo ayudarle..."</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card bl-human">
+    <div class="card-title">💚 Autocuidado en la oficina</div>
+    <div class="card-body">
+      <ul>
+        <li>☕ Pausas conscientes entre tareas</li>
+        <li>💧 Toma agua regularmente</li>
+        <li>🌬️ Respira profundo antes de responder</li>
+        <li>✅ Di "déjame verificar y te confirmo"</li>
+        <li>🤝 Apóyate en tu equipo — no trabajas sola/solo</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MONEY FLOW ===== -->
+<div class="section" id="tab-money">
+  <div class="sec-header bg-money" data-emoji="💰">
+    <h2>Money Flow</h2>
+    <p>Indicadores que impactan el ingreso de la oficina médica — y cómo cada rol puede maximizarlos</p>
+  </div>
+
+  <div class="card bl-money">
+    <div class="card-title">📊 Indicadores: ajuste positivo o negativo</div>
+    <div class="card-body">
+      <table class="info-table">
+        <tr><th>Indicador</th><th>✅ Genera ajuste positivo</th><th>❌ Genera ajuste negativo</th></tr>
+        <tr><td><strong>Quality Score</strong></td><td>5.0 pts — ajuste a favor</td><td>&lt;3.5 pts — ajuste en contra</td></tr>
+        <tr><td><strong>% Encuentro</strong></td><td>≥75% — sin penalidad</td><td>&lt;75% — ajuste negativo</td></tr>
+        <tr><td><strong>Patient Experience</strong></td><td>≥92% — ajuste positivo</td><td>&lt;84.9% — ajuste negativo</td></tr>
+        <tr><td><strong>PPN</strong></td><td>≥65% — sin penalidad</td><td>&lt;64.99% — ajuste negativo</td></tr>
+        <tr><td><strong>InnovaMD</strong></td><td>≥75% — ajuste positivo</td><td>&lt;74.9% — ajuste negativo</td></tr>
+        <tr><td><strong>Smart Profile (InnovaMD)</strong></td><td>Al día — positivo</td><td>Desactualizado — negativo</td></tr>
+      </table>
+      <div class="hl tag-red" style="margin-top:10px;border-radius:10px;padding:12px;">
+        <strong>⚠️ Cada punto cuenta:</strong> Una oficina que pierde en todos los indicadores puede perder hasta $30 PMPM por paciente. En una cartera de 500 pacientes = $15,000 mensuales menos. <strong>¿Quieres saber cómo está tu oficina? Pregúntale a tu representante.</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="card bl-money">
+    <div class="card-title">👥 Rol de cada miembro del equipo</div>
+    <div class="card-body">
+      <div class="role-grid">
+        <div class="role-card">
+          <div class="role-header" style="background:#1565C0;">📞 Secretaria / Recepcionista</div>
+          <div class="role-body">
+            <ul>
+              <li><strong>% Encuentro:</strong> Monitorear activamente y llamar a pacientes — cada visita cuenta para sobrepasar la meta ≥75%</li>
+              <li><strong>Patient Experience:</strong> Trato cálido, tiempo de espera, comunicación clara</li>
+              <li><strong>Elegibilidad:</strong> Verificar plan activo antes de cada cita</li>
+              <li><strong>InnovaMD (Smart Profile):</strong> Descargar o imprimir 2 días antes o el mismo día del encuentro — revisar pendientes y colocar en el expediente antes de que el médico evalúe al paciente</li>
+              <li><strong>Preautorizaciones:</strong> Procesar y dar seguimiento a través de la plataforma de la aseguradora (ej. InnovaMD) — incluir toda la información necesaria para evitar denegaciones</li>
+            </ul>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-header" style="background:#C62828;">🧾 Facturador / Biller</div>
+          <div class="role-body">
+            <ul>
+              <li><strong>Codificación:</strong> Traducir al código ICD-10 y CPT correcto lo que el médico documenta en cada nota de progreso — ante dudas, preguntar al médico</li>
+              <li><strong>Calidad:</strong> Identificar si faltan códigos F (CPT II) para cumplimiento de medidas de calidad</li>
+              <li><strong>Facturación:</strong> Hacer reconciliación y facturar diariamente o semanalmente — mantenerse al día sin dejar acumular</li>
+              <li><strong>Actualización continua:</strong> Mantenerse al día en cambios de ICD-10, CPT y requisitos de las aseguradoras</li>
+              <li><strong>Claim Rescue:</strong> Manejar rechazos y denegaciones dentro de tiempo</li>
+            </ul>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-header" style="background:#2E7D32;">🩺 Enfermera / Coordinadora Clínica</div>
+          <div class="role-body">
+            <ul>
+              <li><strong>InnovaMD:</strong> Revisar notificaciones de ER y alta diariamente</li>
+              <li><strong>FMC/MRP:</strong> Coordinar seguimiento post-hospitalario</li>
+              <li><strong>Quality Score:</strong> Identificar medidas HEDIS abiertas y coordinar</li>
+              <li><strong>Preautorizaciones:</strong> Procesar y gestionar a través de la plataforma de la aseguradora (ej. InnovaMD) con toda la información clínica necesaria para evitar denegaciones</li>
+              <li><strong>PPN:</strong> Si el paciente requiere especialista, redirigir a la red PPN y apoyar la coordinación — meta ≥65%</li>
+            </ul>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-header" style="background:#6A1B9A;">👨‍⚕️ Médico / Proveedor</div>
+          <div class="role-body">
+            <ul>
+              <li><strong>Quality Score:</strong> Documentar diagnósticos específicos y completos</li>
+              <li><strong>% Encuentro:</strong> Ver a cada paciente activo mínimo una vez al año</li>
+              <li><strong>Patient Experience:</strong> Comunicación efectiva y tiempo de calidad</li>
+              <li><strong>MRP:</strong> Reconciliar medicamentos dentro de 30 días post-alta</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card bl-money">
+    <div class="card-title">🚀 ¿Cómo maximiza la oficina los ingresos?</div>
+    <div class="card-body">
+      <ul class="step-list">
+        <li><span class="step-num">1</span><div><strong>Lista mensual de pacientes sin visita anual</strong> — la secretaria llama y agenda proactivamente</div></li>
+        <li><span class="step-num">2</span><div><strong>InnovaMD revisado cada mañana</strong> — la enfermera asignada reporta eventos al médico</div></li>
+        <li><span class="step-num">3</span><div><strong>ICD-10 específico siempre</strong> — el biller verifica antes de enviar cada reclamación</div></li>
+        <li><span class="step-num">4</span><div><strong>Elegibilidad antes de cada visita</strong> — sin excepciones, aunque el paciente venga seguido</div></li>
+        <li><span class="step-num">5</span><div><strong>Respuesta rápida y cálida</strong> — Patient Experience sube con cada interacción positiva</div></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CLAIM RESCUE ===== -->
+<div class="section" id="tab-claim">
+  <div class="sec-header bg-cred" data-emoji="📋">
+    <h2>Claim Rescue</h2>
+    <p>Rechazos vs Denegaciones · Ciclo de ingreso efectivo · Proceso de ajuste</p>
+  </div>
+
+  <div class="card bl-purple">
+    <div class="card-title">⚡ Rechazo vs Denegación — La diferencia más cara</div>
+    <div class="card-body">
+      <table class="info-table">
+        <tr><th></th><th style="color:#C62828;">RECHAZO</th><th style="color:#1565C0;">DENEGACIÓN</th></tr>
+        <tr><td><strong>¿Cuándo?</strong></td><td>Antes de procesarse</td><td>Después de procesarse</td></tr>
+        <tr><td><strong>¿Por qué?</strong></td><td>Error de datos, formato, info incompleta</td><td>El plan decide no pagar</td></tr>
+        <tr><td><strong>¿Qué hacer?</strong></td><td>Corregir y resubmitir</td><td>Apelar formalmente</td></tr>
+        <tr><td><strong>¿Tiempo límite?</strong></td><td>Verificar con clearinghouse</td><td>60–180 días según plan</td></tr>
+        <tr><td><strong>¿Error común?</strong></td><td>No corregir a tiempo</td><td>Perder el tiempo de apelación</td></tr>
+      </table>
+      <div class="hl" style="background:#FFEBEE;margin-top:10px;border-radius:10px;padding:12px;">
+        <strong style="color:#C62828;">⚠️ Recuerda revisar la factura antes de enviarla.</strong> Ante una denegación, verifica siempre si aplica excepción médica, deducible o si se puede redirigir al plan correcto — antes de cualquier acción con el paciente.
+      </div>
+    </div>
+  </div>
+
+  <div class="card bl-purple">
+    <div class="card-title">🔄 El ciclo de ingreso efectivo — 6 etapas</div>
+    <div class="card-body">
+      <ul class="step-list">
+        <li><span class="step-num">1</span><div><strong>Pre-visita</strong> — Elegibilidad, autorización previa, cobertura confirmada</div></li>
+        <li><span class="step-num">2</span><div><strong>Registro</strong> — Datos del paciente, plan activo, información correcta</div></li>
+        <li><span class="step-num">3</span><div><strong>Codificación</strong> — ICD-10 específico, CPT correcto, documentación completa</div></li>
+        <li><span class="step-num">4</span><div><strong>Facturación</strong> — Envío correcto al clearinghouse o plan</div></li>
+        <li><span class="step-num">5</span><div><strong>Seguimiento</strong> — Aging report, apelaciones a tiempo, rechazos corregidos</div></li>
+        <li><span class="step-num">6</span><div><strong>Cierre</strong> — Pago aplicado, balance del paciente, ciclo completado</div></li>
+      </ul>
+      <div class="hl" style="background:#F3E5F5;margin-top:10px;border-radius:10px;padding:12px;">
+        <strong style="color:#6A1B9A;">💡 Clave:</strong> El ciclo comienza ANTES de que el paciente llegue — con la verificación de elegibilidad. Si esa etapa falla, todo lo demás se complica.
+      </div>
+    </div>
+  </div>
+
+  <div class="card bl-purple">
+    <div class="card-title">🛠️ Ajuste de reclamación en InnovaMD — Paso a paso</div>
+    <div class="card-body">
+      <ul class="step-list">
+        <li><span class="step-num">1</span>Ingresar al portal de InnovaMD con tus credenciales</li>
+        <li><span class="step-num">2</span>Localizar la reclamación a ajustar por número o fecha</li>
+        <li><span class="step-num">3</span>Seleccionar "Adjustment reason" → opción "other" y especificar en comentarios</li>
+        <li><span class="step-num">4</span>Si NPI Billing incorrecto: indicar el NPI correcto (el del PMG)</li>
+        <li><span class="step-num">5</span>Adjuntar la factura 1500 corregida en el caso</li>
+        <li><span class="step-num">6</span>Apoyo: Grupo Innova <strong>(787) 993-2317</strong></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MITOS ===== -->
+<div class="section" id="tab-mitos">
+  <div class="sec-header bg-mitos" data-emoji="🎯">
+    <h2>Realidad o Mito</h2>
+    <p>Toca cada tarjeta para revelar la respuesta correcta</p>
+  </div>
+
+  <p style="font-size:13px;color:#666;margin-bottom:14px;line-height:1.6;">Basado en las tarjetas del evento. Toca para revelar.</p>
+
+  <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:#1565C0;text-transform:uppercase;margin:16px 0 8px;">⭐ Calidad</div>
+  <div class="mito-card" onclick="toggleMito(this)">
+    <div class="mito-hdr" style="background:#1565C0;">⭐ CALIDAD — Toca para revelar</div>
+    <div class="mito-q">"El personal de oficina puede coordinar citas preventivas aunque el médico no lo pida directamente."</div>
+    <div class="mito-ans" style="background:#F1F8F1;"><div class="mito-label text-green">✅ REALIDAD</div>Es proactividad, no extralimitarse. Identificar medidas HEDIS abiertas y coordinar mamografías, HbA1c, colonoscopias es parte del rol y cierra métricas Star.</div>
+  </div>
+  <div class="mito-card" onclick="toggleMito(this)">
+    <div class="mito-hdr" style="background:#1565C0;">⭐ CALIDAD — Toca para revelar</div>
+    <div class="mito-q">"Si el plan ya tiene el resultado de laboratorio, la oficina no necesita preocuparse por esa medida HEDIS."</div>
+    <div class="mito-ans" style="background:#FFF5F5;"><div class="mito-label text-red">❌ MITO</div>La información no siempre está sincronizada. Algunas medidas requieren que el resultado esté en el récord de la oficina. Verificar siempre en Availity o Cozeva.</div>
+  </div>
+
+  <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:#6A1B9A;text-transform:uppercase;margin:16px 0 8px;">🏥 Intrahospitalarias</div>
+  <div class="mito-card" onclick="toggleMito(this)">
+    <div class="mito-hdr" style="background:#6A1B9A;">🏥 INTRAHOSPITALARIAS — Toca para revelar</div>
+    <div class="mito-q">"Si un paciente está hospitalizado, la oficina no tiene responsabilidad hasta que salga."</div>
+    <div class="mito-ans" style="background:#FFF5F5;"><div class="mito-label text-red">❌ MITO</div>La oficina tiene rol activo DURANTE la hospitalización — monitorear InnovaMD, coordinar con el hospital y planificar seguimiento post-alta dentro de 7 días.</div>
+  </div>
+  <div class="mito-card" onclick="toggleMito(this)">
+    <div class="mito-hdr" style="background:#6A1B9A;">🏥 INTRAHOSPITALARIAS — Toca para revelar</div>
+    <div class="mito-q">"InnovaMD actúa automáticamente cuando hay un evento — la oficina no tiene que hacer nada adicional."</div>
+    <div class="mito-ans" style="background:#FFF5F5;"><div class="mito-label text-red">❌ MITO</div>InnovaMD notifica pero alguien debe revisarlo activamente, mínimo una vez al día. Sin un rol asignado, las notificaciones no sirven de nada.</div>
+  </div>
+
+  <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:#C62828;text-transform:uppercase;margin:16px 0 8px;">📋 Reclamaciones</div>
+  <div class="mito-card" onclick="toggleMito(this)">
+    <div class="mito-hdr" style="background:#C62828;">📋 RECLAMACIONES — Toca para revelar</div>
+    <div class="mito-q">"Un rechazo y una denegación son lo mismo — en ambos casos hay que someter de nuevo desde cero."</div>
+    <div class="mito-ans" style="background:#FFF5F5;"><div class="mito-label text-red">❌ MITO</div>Son completamente diferentes. El rechazo se corrige y resubmite. La denegación requiere apelación formal con tiempo límite. Confundirlos es uno de los errores más costosos en facturación.</div>
+  </div>
+  <div class="mito-card" onclick="toggleMito(this)">
+    <div class="mito-hdr" style="background:#C62828;">📋 RECLAMACIONES — Toca para revelar</div>
+    <div class="mito-q">"Documentar ICD-10 específico desde la primera reclamación reduce significativamente las denegaciones."</div>
+    <div class="mito-ans" style="background:#F1F8F1;"><div class="mito-label text-green">✅ REALIDAD</div>La especificidad del diagnóstico es crítica. Un código genérico puede resultar en denegación aunque el servicio esté cubierto. El biller tiene un rol directo en capturar esto correctamente.</div>
+  </div>
+
+  <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:#00695C;text-transform:uppercase;margin:16px 0 8px;">💰 Ciclo de Ingreso</div>
+  <div class="mito-card" onclick="toggleMito(this)">
+    <div class="mito-hdr" style="background:#00695C;">💰 CICLO DE INGRESO — Toca para revelar</div>
+    <div class="mito-q">"La elegibilidad solo hay que verificarla una vez al año en la cita anual del paciente."</div>
+    <div class="mito-ans" style="background:#FFF5F5;"><div class="mito-label text-red">❌ MITO</div>Debe verificarse en CADA visita. Los planes de Medicaid pueden cambiar mensualmente. Facturar al plan equivocado genera rechazos automáticos y retrasos en el ingreso.</div>
+  </div>
+</div>
+
+<!-- ===== SEMANA RECONOCIMIENTO ===== -->
+<div class="section" id="tab-semana">
+  <div class="sec-header" style="background:linear-gradient(135deg,#00695C,#004D40);" data-emoji="🏆">
+    <h2>Semana del Asistente Administrativo de Salud</h2>
+    <p>Celebrando a quienes hacen funcionar el sistema de salud de Puerto Rico</p>
+  </div>
+
+  <div class="week-banner">
+    <h3>¡Esta semana es tuya! 🎉</h3>
+    <p>La Semana del Profesional Administrativo de Salud reconoce a las personas que trabajan detrás de escena haciendo que todo funcione — desde la primera llamada hasta la última reclamación.</p>
+    <div class="week-dates">📅 Semana del 21 al 25 de abril de 2026</div>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--teal);">
+    <div class="card-title">💙 ¿Por qué mereces este reconocimiento?</div>
+    <div class="card-body">
+      Porque cada día que vas a trabajar:
+      <ul style="margin-top:8px;">
+        <li>Contestas el teléfono con una sonrisa aunque estés agotada/o</li>
+        <li>Aclaras las dudas del paciente — explicas su situación con claridad y calma</li>
+        <li>Tramitas preautorizaciones con agilidad a través del portal de la aseguradora, con toda la información necesaria para evitar denegaciones</li>
+        <li>Calmas a un paciente furioso en menos de un minuto</li>
+        <li>Coordinan citas, procesan reclamaciones, actualizan récords</li>
+        <li>Hacen que el médico pueda enfocarse en curar</li>
+      </ul>
+      <div class="hl" style="background:#E0F2F1;margin-top:12px;border-radius:10px;padding:13px;font-style:italic;">
+        "El sistema de salud no funciona sin ustedes. No es exageración — es la verdad."
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--teal);">
+    <div class="card-title">⭐ De Asistente a Star Office Professional</div>
+    <div class="card-body">
+      El título de Asistente Administrativo no define el límite de tu impacto. Una Oficina 5 Estrellas no existe sin un equipo administrativo que:
+      <ul style="margin-top:8px;">
+        <li>Conoce los indicadores que afectan las finanzas de la práctica</li>
+        <li>Entiende las métricas Star y cómo su trabajo las cierra</li>
+        <li>Practica empatía como estándar, no como excepción</li>
+        <li>Se actualiza, aprende y comparte conocimiento con el equipo</li>
+      </ul>
+      <div class="hl" style="background:#FFF8EE;margin-top:12px;border-radius:10px;padding:13px;">
+        <strong style="color:var(--dark-orange);">Hoy completaste el Star Office Bootcamp.</strong> Eso te convierte en parte del movimiento de oficinas médicas que elevan el estándar de calidad en Puerto Rico.
+      </div>
+    </div>
+  </div>
+
+  </div><!-- end main -->
+
+<div class="footer">
+  <strong>Las Calles de AMA Contigo ⭐</strong>
+  Star Office Bootcamp Edition · 10 de abril de 2026<br>
+  Hyatt Centric, San Juan · AMA Contigo · IPA Holdings<br>
+  <div style="margin-top:10px;opacity:.5;font-size:11px;">Material educativo de referencia · No reemplaza guías clínicas oficiales</div>
+</div>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+  event.target.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+  window.scrollTo({top:document.querySelector('.nav-tabs').offsetTop - 10,behavior:'smooth'});
+}
+
+function toggleMito(card) {
+  const ans = card.querySelector('.mito-ans');
+  const hdr = card.querySelector('.mito-hdr');
+  if (ans.style.display === 'block') {
+    ans.style.display = 'none';
+    hdr.textContent = hdr.textContent.replace('✓ Revelada','Toca para revelar');
+  } else {
+    ans.style.display = 'block';
+    hdr.textContent = hdr.textContent.replace('Toca para revelar','✓ Revelada');
+  }
+}
+
+function toggleCheck(box) {
+  box.classList.toggle('checked');
+  if (box.classList.contains('checked')) box.textContent = '✓';
+  else box.textContent = '';
+  updateScore();
+}
+
+function updateScore() {
+  const total = document.querySelectorAll('.check-box').length;
+  const checked = document.querySelectorAll('.check-box.checked').length;
+  const pct = Math.round((checked / total) * 100);
+  let stars = '⭐'.repeat(Math.floor(checked / 2));
+  let msg = '';
+  if (checked === 0) msg = 'Marca las que ya haces y ve tu puntaje ⭐';
+  else if (pct < 30) msg = `${checked}/${total} — Estás comenzando el camino. ¡El bootcamp de hoy fue tu primer paso! ${stars}`;
+  else if (pct < 60) msg = `${checked}/${total} — Vas por buen camino. Identifica qué falta y ponlo en práctica esta semana. ${stars}`;
+  else if (pct < 90) msg = `${checked}/${total} — ¡Tu oficina está muy cerca! Enfócate en los últimos puntos. ${stars}`;
+  else msg = `${checked}/${total} — ¡Felicidades! Tu oficina ya opera como una Oficina 5 Estrellas. ⭐⭐⭐⭐⭐`;
+  document.getElementById('starScore').textContent = msg;
+}
+
+function updatePreview() {
+  const name = document.getElementById('certName').value.trim();
+  const office = document.getElementById('certOffice').value.trim();
+  const role = document.getElementById('certRole').value;
+  document.getElementById('prevName').textContent = name || 'Tu Nombre Aquí';
+  document.getElementById('prevOffice').textContent = office || 'Tu Oficina / Médico';
+  document.getElementById('prevRole').textContent = role || 'Tu Rol';
+  const btn = document.getElementById('downloadBtn');
+  btn.disabled = !(name && office && role);
+}
+
+function toggleAccordion(btn) {
+  const body = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  document.querySelectorAll('.acc-btn').forEach(b => { b.classList.remove('open'); b.nextElementSibling.classList.remove('open'); });
+  if (!isOpen) { btn.classList.add('open'); body.classList.add('open'); }
+}
+</script>
+</body>
+</html>
